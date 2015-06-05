@@ -3,7 +3,7 @@ var dynamic_fluid = require('./dynamic-fluid');
 module.exports = {
 
 
-	getPumpPower: function(initial_speed, final_speed, gravity_speed, initial_height, final_height, initial_pressure, final_pressure, fluid_density, pump_efficiency, lwf){
+	getPumpEnergy: function(initial_speed, final_speed, gravity_speed, initial_height, final_height, initial_pressure, final_pressure, fluid_density, pump_efficiency, lwf){
 
 		var Δv2 = Math.pow(final_speed,2) - Math.pow(initial_speed,2);
 		var Δz = initial_height - final_height;

@@ -2,9 +2,9 @@ module.exports = {
 
 	applyPumpPower:function(mass_flow,pump_energy,pump_power){
 
-		var has_pump_power = (typeof pump_power != 'undefined' || pump_power == null);
-		var has_pump_energy = (typeof pump_energy != 'undefined' || pump_energy == null);
-		var has_mass_flow = (typeof mass_flow != 'undefined' || mass_flow == null);
+		var has_pump_power = (typeof pump_power != 'undefined' && pump_power != null);
+		var has_pump_energy = (typeof pump_energy != 'undefined' && pump_energy != null);
+		var has_mass_flow = (typeof mass_flow != 'undefined' && mass_flow != null);
 
 		var abstract_pump_energy = 0;
 
@@ -27,22 +27,24 @@ module.exports = {
 
 	applyMassFlow: function(tube_area, fluid_density, fluid_speed, mass_flow){
 
-		var has_tube_area = (typeof tube_area != 'undefined' || tube_area == null);
-		var has_fluid_density = (typeof fluid_density != 'undefined' || fluid_density == null);
-		var has_fluid_speed = (typeof fluid_speed != 'undefined' || fluid_speed == null);
-		var has_mass_flow = (typeof mass_flow != 'undefined' || mass_flow == null);
+		var has_tube_area = (typeof tube_area != 'undefined' && tube_area != null);
+		var has_fluid_density = (typeof fluid_density != 'undefined' && fluid_density != null);
+		var has_fluid_speed = (typeof fluid_speed != 'undefined' && fluid_speed != null);
+		var has_mass_flow = (typeof mass_flow != 'undefined' && mass_flow != null);
+
+		console.log(tube_area, fluid_density, fluid_speed, mass_flow);
 
 		if(!has_mass_flow && has_tube_area && has_fluid_density && has_fluid_speed)
 			return tube_area * fluid_density * fluid_speed;
 
 		if(has_mass_flow && has_tube_area && has_fluid_density && !has_fluid_speed)
-			return (tube_area * fluid_density) / mass_flow;
+			return mass_flow /(tube_area * fluid_density);
 
 		if(has_mass_flow && has_tube_area && !has_fluid_density && has_fluid_speed)
-			return  (tube_area * fluid_speed) / mass_flow;
+			return  mass_flow / (tube_area * fluid_speed);
 
 		if(has_mass_flow && !has_tube_area && has_fluid_density && has_fluid_speed)
-			return (fluid_density * fluid_speed) / mass_flow;
+			return mass_flow / (fluid_density * fluid_speed);
 
 		return false;
 
@@ -50,10 +52,10 @@ module.exports = {
 
 	applyHidrostaticPressure: function(fluid_density, height, gravity_force, hydrostatic_pressure){
 
-		var has_fluid_density = (typeof fluid_density != 'undefined' || fluid_density == null);
-		var has_height = (typeof height != 'undefined' || height == null);
-		var has_gravity_force = (typeof gravity_force != 'undefined' || gravity_force == null);
-		var has_hydrostatic_pressure = (typeof hydrostatic_pressure != 'undefined' || hydrostatic_pressure == null);
+		var has_fluid_density = (typeof fluid_density != 'undefined' && fluid_density != null);
+		var has_height = (typeof height != 'undefined' && height != null);
+		var has_gravity_force = (typeof gravity_force != 'undefined' && gravity_force != null);
+		var has_hydrostatic_pressure = (typeof hydrostatic_pressure != 'undefined' && hydrostatic_pressure != null);
 
 		//if no gravity force specified, let's assume earth's one
 		if(!has_gravity_force)
@@ -63,10 +65,10 @@ module.exports = {
 			return fluid_density * height * gravity_force;
 
 		if(has_hydrostatic_pressure && has_height && !has_fluid_density)
-			return (gravity_force * height) / hydrostatic_pressure;
+			return hydrostatic_pressure / (gravity_force * height);
 
 		if(has_hydrostatic_pressure && !has_height && has_fluid_density)
-			return (gravity_force * height) / hydrostatic_pressure;
+			return hydrostatic_pressure / (gravity_force * fluid_density);
 
 		return false;
 
