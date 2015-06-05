@@ -1,0 +1,19 @@
+{
+  "name": "dynamic-fluid",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dansoah/fluid-dynamics.git"
+  },
+  "author": "dansoah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dansoah/fluid-dynamics/issues"
+  },
+  "homepage": "https://github.com/dansoah/fluid-dynamics"
+}
